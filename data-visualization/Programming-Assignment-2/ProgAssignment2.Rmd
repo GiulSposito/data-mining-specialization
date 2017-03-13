@@ -1,0 +1,24 @@
+---
+title: "Data Visualization Assign. 2"
+output: html_notebook
+---
+
+## Overview
+
+This assignment of **[Data Visualization Course](https://www.coursera.org/learn/datavisualization/home/welcome)** @ [Coursera](http://www.coursera.org) meant to give you the opportunity to do non-coordinate data visualization, specifically using a network of your choosing.
+
+If you are Peer Reviewer you can junp straight to the "Chart" section in this document.
+
+## Goals
+
+Network data lends itself easily to graph visualization. This assignment will allow you to explore the means of network visualization that you have encountered in the course, to decide how best to visualize data, and to analyze other network visualizations.
+
+## Instructions
+
+Find some network data that you think is suitable and that you would like to visualize. Here are some sites that provide links to a wide variety of different graph/network datasets:
+
+* [Stanford Large Network Dataset Collection](http://snap.stanford.edu/data/index.html)
+* [UCI Network Data Repository](https://networkdata.ics.uci.edu/index.php)
+
+Choose a visualization platform and parse the data into a format suitable for the tools you will use.
+
