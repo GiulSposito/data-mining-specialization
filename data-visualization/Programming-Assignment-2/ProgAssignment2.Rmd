@@ -7,7 +7,7 @@ output:
 
 ## Overview
 
-If you are Peer Reviewer you can junp straight to the "Chart" section in this document.
+If you are Peer Reviewer you can jump straight to the "Chart" section in this document.
 
 This assignment of **[Data Visualization Course](https://www.coursera.org/learn/datavisualization/home/welcome)** @ [Coursera](http://www.coursera.org) meant to give you the opportunity to do non-coordinate data visualization, specifically using a network of your choosing.
 
@@ -15,7 +15,7 @@ This assignment of **[Data Visualization Course](https://www.coursera.org/learn/
 
 Network data lends itself easily to graph visualization. This assignment will allow you to explore the means of network visualization that you have encountered in the course, to decide how best to visualize data, and to analyze other network visualizations.
 
-In this document, first I'll try to get a good and representative visualization of a graph and to try explore and reproduce the visualization one of the slides were **John Hart** uses [Betweenness Centrality](https://en.wikipedia.org/wiki/Betweenness_centrality) to clusterize the colege football teams and reconstruct the team's divisions (video_3.1.3-slide_7):
+In this document, first I'll try to get a good and representative visualization of a graph and to try explore and reproduce the visualization one of the slides were **John Hart** uses [Betweenness Centrality](https://en.wikipedia.org/wiki/Betweenness_centrality) to clusterize the college football teams and reconstruct the team's divisions (video_3.1.3-slide_7):
 
 ![video 3.1.3 - slide 7](./img/slide.jpg)
 
@@ -23,12 +23,12 @@ In this document, first I'll try to get a good and representative visualization 
 
 ### 1. Find & choose data
 
-Find some network data that you think is suitable and that you would like to visualize. Here are some sites that provide links to a wide variety of different graph/network datasets:
+Find some network data that you think is suitable and that you would like to visualize. Here are some sites that provide links to a wide variety of different graph/network data sets:
 
 * [Stanford Large Network Dataset Collection](http://snap.stanford.edu/data/index.html)
 * [UCI Network Data Repository](https://networkdata.ics.uci.edu/index.php)
 
-We'll use the [UCI's American College Football](https://networkdata.ics.uci.edu/data.php?id=5) dataset. There are one [GML format](https://en.wikipedia.org/wiki/Graph_Modelling_Language) file, we'll download this dataset.
+We'll use the [UCI's American College Football](https://networkdata.ics.uci.edu/data.php?id=5) data set. There are one [GML format](https://en.wikipedia.org/wiki/Graph_Modelling_Language) file, we'll download this data set.
 
 ```{r download}
 # setup packages
@@ -67,18 +67,18 @@ verts <- length(V(graph))
 
 ```
 
-The dataset has **`r verts`** verties and **`r edges`** edges.
+The data set has **`r verts`** vertices and **`r edges`** edges.
 
 ### 2. Preliminary visualizations
 
-Ploting the graph:
+Plotting the graph:
 
 ```{r preChart}
 # plot
 plot(graph)
 ```
 
-This is a bad visualization. We didn't define a layout and we can't see any structure. Let's define a circle layout and remove the labels temporaly:
+This is a bad visualization. We didn't define a layout and we can't see any structure. Let's define a circle layout and remove the labels temporally:
 
 ```{r circleLayout}
 
@@ -89,11 +89,11 @@ plot(graph, layout=serialCircle, vertex.label=NA, vertex.size=6)
 ```
 
 
-We remove the vertices superpositions, but we can see any structure in the dataset. The reasons to that are we put the vertices in the circle following no specific order and there a lot of edges (`r edges`).
+We remove the vertices super-positions, but we can see any structure in the data set. The reasons to that are we put the vertices in the circle following no specific order and there a lot of edges (`r edges`).
 
 ### 4. Seeing the structure
 
-In the graph dataset downloaded from UCI, also there are [the information about the team's conferences](http://networkdata.ics.uci.edu/data/football/football.txt), as des
+In the graph data set downloaded from UCI, also there are [the information about the team's conferences](http://networkdata.ics.uci.edu/data/football/football.txt), as describe bellow.
 
 > The file football.gml contains the network of American football games between Division IA colleges during regular season Fall 2000, as compiled by M. Girvan and M. Newman.  The nodes have values that indicate to which conferences they belong.  The values are as follows:
 > 
@@ -121,7 +121,7 @@ Nice, we can now see the some structure in the chart.
 
 ## Chart
 
-Now, lets, put some decorations to make more easily see the teams conference organizaions
+Now, lets, put some decorations to make more easily see the teams conference organizations
 
 ```{r orderDivisionColor}
 
@@ -153,11 +153,11 @@ leg <- legend(x=-2.5, y=1, leg.txt, title = "Conferences", fill = my.palette)
 
 **What is the data that you chose? Why?**
 
-The [UCI's American College Football](https://networkdata.ics.uci.edu/data.php?id=5) dataset was choosed because of team's division structure, I would like to see if it's possible to visualize this structure in a graph chart.
+The [UCI's American College Football](https://networkdata.ics.uci.edu/data.php?id=5) data set was choose because of team's division structure, I would like to see if it's possible to visualize this structure in a graph chart.
 
 **Did you use a subset of the data? If so, what was it?**
 
-No the whole dataset
+No the whole data set
 
 **Did you use a subset of the data? If so, what was it?**
 
@@ -169,11 +169,11 @@ The vertices form clusters, we can see checking the density of edges inside this
 
 ## Extensions
 
-In this section I'll try to use [Betweenness Centrality](https://en.wikipedia.org/wiki/Betweenness_centrality) to clusterize the colege football teams and reconstruct the team's divisions.
+In this section I'll try to use [Betweenness Centrality](https://en.wikipedia.org/wiki/Betweenness_centrality) to clusterize the college football teams and reconstruct the team's divisions.
 
 If you are a Coursera's peer reviewer, you can ignore the remaining document.
 
-### 1. Clustering using Betweenness
+### Clustering using Betweenness
 
 To handle with the problem with the visualizations above, we'll try apply cluster the vertices using **[Betweennes Centrality](https://en.wikipedia.org/wiki/Betweenness_centrality)**. 
 
@@ -204,7 +204,54 @@ plot(graph, layout=clusterCircle, edge.curved=.5, vertex.label=NA, vertex.size=6
 ```
 
 
-### 2. Visualizing the clusters
+
+### Removing Edges
+
+Now we see an structure, the center of the graph is now more clean and it's possible visualize the "conferences". We can "clean up" the edges removing the highest betweenness edges. Lets view the edges betweenness distribution.
+
+```{r edgeBetween}
+ebc <- edge_betweenness(graph, e = E(graph))
+hist(ebc, breaks=50, col="Red")
+summary(ebc)
+```
+
+To clean up the edges, We'll remove 1/4 of the edges (the highest edge betweenness). 
+
+```{r removeEdge}
+
+# threshold (3rd Quartile)
+th <- summary(ebc)[5]
+toRemove <- which(ebc>th)
+graph2 <- delete_edges( graph, toRemove)
+plot(graph2, layout=clusterCircle, edge.curved=.5, vertex.label=NA, vertex.size=6, vertex.color=membership(ceb))
+
+```
+
+Very good representation, we now see the games intoween the conferences and some games between then. 
+
+### Clusters and Conferences
+
+The clusterization not detect all divisions, from the 12 division we only found `r n_cluster` but is a good approximation.
+
+```{r}
+
+teams.conf <- V(graph)[order(membership(ceb))]$value
+teams.clst <- membership(ceb)[order(membership(ceb))]
+
+comp <- unique(data.frame(
+  Conferencia    = leg.txt[1+teams.conf],
+  Cluster.Number = teams.clst
+))
+
+
+
+knitr::kable(comp, caption = "Conferences and Clusters", row.names = F)
+
+```
+
+We can see now, how the clustering merge together some conferences. Atlantic Coast, Big Ten and Conference USA was well defined, but others conferences was mixed in some level.
+
+### Visualizing the Diferences
 
 ```{r plotlyGraph, warning=FALSE, message=FALSE}
 
@@ -240,15 +287,20 @@ for(i in 1:Ne) {
 # clean grid in chart
 axis <- list(title = "", showgrid = FALSE, showticklabels = FALSE, zeroline = FALSE)
 
-# colors
-getPalette = colorRampPalette(brewer.pal(12, "Paired"))
+# colors & symbols
+getPalette <-  colorRampPalette(brewer.pal(12, "Paired"))
+symbols <- c("circle","square","diamond","triangle-up",
+             "triangle-down","cross","x","star-square",
+             "circle-x","pentagon-dot","triangle-right","triangle-left")
 
 network <- plot_ly(x = ~Xn, y = ~Yn, 
                    mode = "markers", 
-                   text = paste0("Team: ",V(graph)$label, " Cluster: ",  membership(ceb)),
-                   name = paste0("Cluster: ",  membership(ceb)),
+                   text = paste0("Team: ",V(graph)$label, "<br> Cluster: ",
+                                 membership(ceb),"<br> Conference:", 
+                                 leg.txt[1+V(graph)$value]),
+                   name = leg.txt[1+V(graph)$value],
                    hoverinfo = "text",
-                   symbol = membership(ceb), 
+                   symbol = symbols[1+V(graph)$value], 
                    color = getPalette(12)[membership(ceb)], 
                    marker=list(size = 10)) %>%
   layout( xaxis = axis, yaxis = axis, showlegend = FALSE, shapes = edge_shapes,
@@ -258,29 +310,4 @@ network
 
 ```
 
-
-### 3. Removing Edges
-
-Now we see an structure, the center of the graph is now more clean and it's possible visualize the "conferences". We can "clean up" the edges removing the highests betweenness edges. Lets view the edges betweenness distribution.
-
-```{r edgeBetween}
-ebc <- edge_betweenness(graph, e = E(graph))
-hist(ebc, breaks=50, col="Red")
-summary(ebc)
-```
-
-To clean up the edges, We'll remove 1/4 of the edges (the highests edge betweenness). 
-
-```{r removeEdge}
-
-# threshold (3rd Quartile)
-th <- summary(ebc)[5]
-toRemove <- which(ebc>th)
-graph2 <- delete_edges( graph, toRemove)
-plot(graph2, layout=clusterCircle, edge.curved=.5, vertex.label=NA, vertex.size=6, vertex.color=membership(ceb))
-
-```
-
-Very good representation, we now see the games between the conferences and some games between then. The clusterization not detect all divisions, from the 12 division we only found `r n_cluster` but is a good approximation.
-
-
+In this visualizations, finally we can see the clustering information and the actual team's conference.
